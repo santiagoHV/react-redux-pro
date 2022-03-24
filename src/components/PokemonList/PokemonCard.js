@@ -10,13 +10,16 @@ const PokemonCard = ({pokemon}) => {
         <Icon name='favorite' color={FAV_COLOR} />
         <Image
           centered
-          src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
+          src={pokemon.sprites.front_default}
         />
         <h2 className='PokemonCard-title'>{pokemon.name}</h2>
         <Divider />
-        <Label color={MAIN_COLOR}>
-          normal
-        </Label>
+        {
+          pokemon.types.map(type => 
+            (<Label color={MAIN_COLOR} key={`${pokemon.id}-${type.type.name}`}>
+              {type.type.name}
+            </Label>))
+        }
       </div>
     </Grid.Column>
   );
