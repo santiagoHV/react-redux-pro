@@ -22,7 +22,7 @@ function Home() {
   const list = useSelector(state => state.list)
 
   useEffect(()=>{
-    dispatch(getPokemonsWithDetails)
+    dispatch(getPokemonsWithDetails())
   },[])
 
   return (
