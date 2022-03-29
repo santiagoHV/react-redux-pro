@@ -1,7 +1,9 @@
-import { SET_POKEMON, SET_ERROR, CLEAN_ERROR } from "../actions/types";
+import { SET_POKEMON, SET_ERROR, CLEAN_ERROR, TOGGLE_LOADER } from "../actions/types";
 
 const initialState = {
-    list: []
+    list: [],
+    error: '',
+    loading: false
 }
 
 const pokemonReducer = (state = initialState, action) => {
@@ -13,6 +15,8 @@ const pokemonReducer = (state = initialState, action) => {
             return {...state, error: action.payload.message };
         case CLEAN_ERROR:
             return {...state, error: '' };
+        case TOGGLE_LOADER:
+            return {...state, loading: !state.loading };
         default:
             return {...state };
     }

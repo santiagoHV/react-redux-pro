@@ -7,14 +7,24 @@ import './index.css';
 import pokemonReducer from './reducers/pokemonReducer';
 import { logActions } from './middlewares';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import { pokemonSaga } from './sagas';
 
 //TODO: que carajos hace THUNK????
 
-const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//para saga 
+const sagaMiddleware = createSagaMiddleware()
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
+
+
 //componer los enhancers
-const composedEnhancers = composeAlt(
+const composedEnhancers = composeEnhancers(
     applyMiddleware(
-        thunk,
+        // thunk,
+        sagaMiddleware,
         logActions
     )
 )
@@ -23,6 +33,8 @@ const store = createStore(
     pokemonReducer,
     composedEnhancers
 );
+
+sagaMiddleware.run(pokemonSaga)
 
 ReactDOM.render( 
     <Provider store={store}>

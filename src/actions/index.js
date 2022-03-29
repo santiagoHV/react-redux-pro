@@ -1,6 +1,6 @@
 import axiosInstance from "../api/config"
 import { getPokemons } from "../api/getPokemons"
-import { SET_POKEMON, SET_ERROR, CLEAN_ERROR } from "./types"
+import { SET_POKEMON, SET_ERROR, CLEAN_ERROR, FETCH_POKEMONS_WITH_DETAILS, TOGGLE_LOADER } from "./types"
 
 export const setPokemon = payload => ({
     type: SET_POKEMON,
@@ -17,22 +17,32 @@ export const clearError = payload => ({
     payload,
 })
 
-//para redux thunk funcion devuelve una funcion
-export const getPokemonsWithDetails = () => dispatch => {
-    getPokemons()
-        .then(response => {
-            const pokemonList = response.results
+export const toggleLoader = payload => ({
+    type: TOGGLE_LOADER,
+    payload,
+})
 
-            return Promise.all(
-                pokemonList.map(pokemon => axiosInstance.get(pokemon.url))
-            )
-        })
-        .then(pokemonsResponse => {
-            const pokemonsData = pokemonsResponse.map(pokemon => pokemon.data)
-            console.log(pokemonsData)
-            dispatch(setPokemon(pokemonsData))
-        })
-        .catch(error => {
-            dispatch(setError({ message: 'ocurrio un error' }, error))
-        })
-}
+export const fetchPokemonsWithDetails = (payload) => ({
+    type: FETCH_POKEMONS_WITH_DETAILS,
+    payload,
+})
+
+//para redux thunk funcion devuelve una funcion
+// export const getPokemonsWithDetails = () => dispatch => {
+//     getPokemons()
+//         .then(response => {
+//             const pokemonList = response.results
+
+//             return Promise.all(
+//                 pokemonList.map(pokemon => axiosInstance.get(pokemon.url))
+//             )
+//         })
+//         .then(pokemonsResponse => {
+//             const pokemonsData = pokemonsResponse.map(pokemon => pokemon.data)
+//             console.log(pokemonsData)
+//             dispatch(setPokemon(pokemonsData))
+//         })
+//         .catch(error => {
+//             dispatch(setError({ message: 'ocurrio un error' }, error))
+//         })
+// }
