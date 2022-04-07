@@ -1,6 +1,6 @@
 import axiosInstance from "../api/config"
 import { getPokemons } from "../api/getPokemons"
-import { SET_POKEMON, SET_ERROR, CLEAN_ERROR, FETCH_POKEMONS_WITH_DETAILS, TOGGLE_LOADER } from "./types"
+import { SET_POKEMON, SET_ERROR, CLEAN_ERROR, FETCH_POKEMONS_WITH_DETAILS, TOGGLE_LOADER, SET_FAVORITE } from "./types"
 
 export const setPokemon = payload => ({
     type: SET_POKEMON,
@@ -19,6 +19,11 @@ export const clearError = payload => ({
 
 export const toggleLoader = payload => ({
     type: TOGGLE_LOADER,
+    payload,
+})
+
+export const setFavorite = payload => ({
+    type: SET_FAVORITE,
     payload,
 })
 

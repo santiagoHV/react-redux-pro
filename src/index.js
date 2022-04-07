@@ -9,6 +9,7 @@ import { logActions } from './middlewares';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { pokemonSaga } from './sagas';
+import rootReducer from './reducers/rootReducer';
 
 //TODO: que carajos hace THUNK????
 
@@ -30,7 +31,7 @@ const composedEnhancers = composeEnhancers(
 )
 //se implementa el store
 const store = createStore(
-    pokemonReducer,
+    rootReducer,
     composedEnhancers
 );
 

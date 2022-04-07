@@ -1,9 +1,7 @@
-import { SET_POKEMON, SET_ERROR, CLEAN_ERROR, TOGGLE_LOADER } from "../actions/types";
+import { SET_POKEMON, SET_FAVORITE } from "../actions/types";
 
 const initialState = {
     list: [],
-    error: '',
-    loading: false
 }
 
 const pokemonReducer = (state = initialState, action) => {
@@ -11,12 +9,17 @@ const pokemonReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_POKEMON:
             return {...state, list: action.payload }
-        case SET_ERROR:
-            return {...state, error: action.payload.message };
-        case CLEAN_ERROR:
-            return {...state, error: '' };
-        case TOGGLE_LOADER:
-            return {...state, loading: !state.loading };
+        case SET_FAVORITE:
+            console.log('estado')
+            console.log(state)
+            const newPokemonList = [...state.list];
+            const currentPokemonIndex = newPokemonList.findIndex(pokemon => pokemon.id === action.payload);
+
+            if (currentPokemonIndex >= -1) {
+                newPokemonList[currentPokemonIndex].favorite = !newPokemonList[currentPokemonIndex].favorite;
+            }
+
+            return {...state, list: newPokemonList };
         default:
             return {...state };
     }

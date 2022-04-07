@@ -21,8 +21,8 @@ import Loader from '../../components/Loader';
 
 function Home() {
   const dispatch = useDispatch()
-  const list = useSelector(state => state.list)
-  const loading = useSelector(state => state.loading)
+  const list = useSelector(state => state.pokemons.list)
+  const loading = useSelector(state => state.ui.loading)
 
   useEffect(()=>{
     //para thunk
